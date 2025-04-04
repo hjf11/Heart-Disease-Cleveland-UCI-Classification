@@ -1,0 +1,23 @@
+Data preprcessing:
+    -> replace missing values with mean or median
+    -> convert cathegorical values
+    -> check if target is balanced, if not fix it
+    -> split data into train-test 80:20
+
+Use 5-fold cross-validation on training!
+
+Models to try_
+    -> Logistic Regression
+    -> Decision Tree
+    -> SVM
+    -> Random Forest
+    -> KNN (?)
+    -> XGBoost
+    -> NN (architectures described in photo and in paper 2)
+
+Evaluation Metrics:
+    -> Accuracy
+    -> Precision
+    -> Recall
+    -> F1
+    -> Visualisation of ROC-AUC
