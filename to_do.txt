@@ -7,17 +7,17 @@ Data preprcessing:
 Use 5-fold cross-validation on training!
 
 Models to try_
-    -> Logistic Regression
-    -> Decision Tree
-    -> SVM
+    -> Logistic Regression                                  +
+    -> Decision Tree                                        -
+    -> SVM                                                  +
     -> Random Forest
     -> KNN (?)
     -> XGBoost
     -> NN (architectures described in photo and in paper 2)
 
 Evaluation Metrics:
-    -> Accuracy
-    -> Precision
-    -> Recall
-    -> F1
-    -> Visualisation of ROC-AUC
+    -> Accuracy                 +
+    -> Precision                +
+    -> Recall                   +
+    -> F1                       +
+    -> Visualisation of ROC-AUC +
