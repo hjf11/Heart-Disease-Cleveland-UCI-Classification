@@ -1,9 +1,9 @@
 Data preprcessing:
-    -> replace missing values with mean or median
-    -> convert cathegorical values
-    -> check if target is balanced, if not fix it
-    -> normalize the data!
-    -> split data into train-test 80:20
+    -> replace missing values with mean or median       +
+    -> convert cathegorical values                      +
+    -> check if target is balanced, if not fix it       +
+    -> normalize the data!                              +
+    -> split data into train-test 80:20                 +
 
 Use 5-fold cross-validation on training!
 
@@ -12,9 +12,9 @@ Models to try_
     -> Decision Tree                                        -
     -> SVM                                                  +
     -> Random Forest
-    -> KNN (?)
+    -> KNN (?)                                              +
     -> XGBoost
-    -> NN (architectures described in photo and in paper 2)
+    -> NN (architectures described in photo and in paper 2) +
 
 Evaluation Metrics:
     -> Accuracy                 +
