@@ -4,6 +4,17 @@ import seaborn as sns
 from sklearn.metrics import roc_curve, roc_auc_score, confusion_matrix, classification_report
 import tensorflow.keras as keras
 
+def print_classification_report_from_model(model, X, y):
+    if isinstance(model, keras.Model):
+        probs = model.predict(X)
+        pred = (probs > 0.5).astype(int)
+    else:
+        pred = model.predict(X)
+    
+    print("Classification Report (Train data):")
+    print(classification_report(y, pred))
+    
+
 def print_classification_report(y, pred):
     print("Classification Report:")
     print(classification_report(y, pred))
