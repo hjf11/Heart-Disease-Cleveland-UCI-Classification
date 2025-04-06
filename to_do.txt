@@ -2,6 +2,7 @@ Data preprcessing:
     -> replace missing values with mean or median
     -> convert cathegorical values
     -> check if target is balanced, if not fix it
+    -> normalize the data!
     -> split data into train-test 80:20
 
 Use 5-fold cross-validation on training!
