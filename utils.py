@@ -8,7 +8,8 @@ def print_classification_report(y, pred):
     print("Classification Report:")
     print(classification_report(y, pred))
     
-def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):
+    
+def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):    
     cm = confusion_matrix(y, pred)
     
     plt.figure(figsize=(6, 5))
@@ -18,13 +19,11 @@ def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):
         for j in range(2):
             count = cm[i, j]
             
-            # Calculate the intensity of the background color (for dynamic text color)
-            cell_value = cm[i, j]
             max_value = np.max(cm)
-            color_intensity = cell_value / max_value  # Values between 0 and 1
+            color_intensity = count / max_value  # Values between 0 and 1
             
             # Choose text color based on intensity
-            text_color = 'black' if color_intensity < 0.5 else 'white'
+            text_color = 'white' if color_intensity > 0.5 else 'black'
             
             # Create the label with count and type
             if i == 0 and j == 0:
@@ -46,7 +45,6 @@ def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):
     plt.tight_layout()
     plt.show()
     
-    
     # cm = confusion_matrix(y, pred)
 
     # plt.figure(figsize=(6, 5))
@@ -56,6 +54,7 @@ def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):
     # plt.title('Confusion Matrix')
     # plt.tight_layout()
     # plt.show()
+    
     
 def print_roc_curve(y, probs):
     fpr, tpr, thresholds = roc_curve(y, probs)
@@ -73,7 +72,8 @@ def print_roc_curve(y, probs):
     plt.tight_layout()
     plt.show()
     
-def print_metrics(model, X, y):
+    
+def print_metrics(model, X, y): 
     # check if it is keras model
     if isinstance(model, keras.Model):
         probs = model.predict(X)
@@ -86,6 +86,7 @@ def print_metrics(model, X, y):
     print()
     print_confusion_matrix(y, pred)
     print_roc_curve(y, probs)
+    
     
 def plot_roc_curves(models, model_names, X, y):
     """
