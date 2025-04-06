@@ -1,3 +1,4 @@
+import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import roc_curve, roc_auc_score, confusion_matrix, classification_report
@@ -7,16 +8,54 @@ def print_classification_report(y, pred):
     print("Classification Report:")
     print(classification_report(y, pred))
     
-def print_confusion_matrix(y, pred, labels = ['No Disease', 'Disease']):
+def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):
     cm = confusion_matrix(y, pred)
-
+    
     plt.figure(figsize=(6, 5))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+    ax = sns.heatmap(cm, annot=False, fmt='d', cmap='Greens', xticklabels=labels, yticklabels=labels, cbar=False)
+    
+    for i in range(2):  # 2 classes (binary classification)
+        for j in range(2):
+            count = cm[i, j]
+            
+            # Calculate the intensity of the background color (for dynamic text color)
+            cell_value = cm[i, j]
+            max_value = np.max(cm)
+            color_intensity = cell_value / max_value  # Values between 0 and 1
+            
+            # Choose text color based on intensity
+            text_color = 'black' if color_intensity < 0.5 else 'white'
+            
+            # Create the label with count and type
+            if i == 0 and j == 0:
+                label = f'True Negative\n{count}'
+            elif i == 0 and j == 1:
+                label = f'False Positive\n{count}'
+            elif i == 1 and j == 0:
+                label = f'False Negative\n{count}'
+            elif i == 1 and j == 1:
+                label = f'True Positive\n{count}'
+            
+            # Annotate the cell with the label (count + classification type)
+            plt.text(j + 0.5, i + 0.5, label, ha='center', va='center', color=text_color, fontsize=12)
+    
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
     plt.title('Confusion Matrix')
+    
     plt.tight_layout()
     plt.show()
+    
+    
+    # cm = confusion_matrix(y, pred)
+
+    # plt.figure(figsize=(6, 5))
+    # sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+    # plt.xlabel('Predicted Label')
+    # plt.ylabel('True Label')
+    # plt.title('Confusion Matrix')
+    # plt.tight_layout()
+    # plt.show()
     
 def print_roc_curve(y, probs):
     fpr, tpr, thresholds = roc_curve(y, probs)
