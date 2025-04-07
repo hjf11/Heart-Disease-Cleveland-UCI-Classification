@@ -87,7 +87,7 @@ def print_roc_curve(y, probs):
 def print_metrics(model, X, y): 
     # check if it is keras model
     if isinstance(model, keras.Model):
-        probs = model.predict(X)
+        probs = model.predict(X, verbose=0)
         pred = (probs > 0.5).astype(int)
     else:
         pred = model.predict(X)
