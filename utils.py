@@ -108,10 +108,7 @@ def plot_roc_curves(models, model_names, X, y):
         model_names (list): List of model names (strings) corresponding to models.
         X (array): Features.
         y (array): Labels.
-    """
-    # for model in models:
-    #     model.fit(X, y)
-    
+    """    
     plt.figure(figsize=(8, 6))
     sns.set_style("whitegrid")
 
