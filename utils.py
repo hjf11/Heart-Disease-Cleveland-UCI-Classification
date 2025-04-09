@@ -116,19 +116,15 @@ def plot_roc_curves(models, model_names, X, y):
     sns.set_style("whitegrid")
 
     for model, name in zip(models, model_names):
-        if hasattr(model, "predict_proba"):
-            probs = model.predict_proba(X)[:, 1]
-        elif hasattr(model, "decision_function"):
-            # For models like SVM with no predict_proba unless explicitly enabled
-            probs = model.decision_function(X)
+        if isinstance(model, keras.Model):
+            probs = model.predict(X, verbose=0)
         else:
-            raise ValueError(f"Model '{name}' must support predict_proba or decision_function.")
+            probs = model.predict_proba(X)[:, 1]
 
         fpr, tpr, _ = roc_curve(y, probs)
         auc = roc_auc_score(y, probs)
         plt.plot(fpr, tpr, label=f"{name} (AUC = {auc:.4f})", linewidth=2)
 
-    # Diagonal random line
     plt.plot([0, 1], [0, 1], color='gray', linestyle='--')
 
     plt.xlabel("False Positive Rate")
