@@ -56,4 +56,6 @@ We implemented and evaluated the following machine learning models:
 - **XGBoost**
 - **Neural Network (MLPClassifier)**
 
+---
+
 This project was developed for the **Complements of Machine Learning** course at the **University of Aveiro**.
