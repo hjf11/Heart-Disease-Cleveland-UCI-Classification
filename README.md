@@ -1,6 +1,6 @@
 # Heart Disease Prediction – Cleveland UCI Dataset
 
-**University of Aveiro – Complements of Machine Learning**
+**University of Aveiro**
 
 This project focuses on binary classification of heart disease presence using the Cleveland UCI Heart Disease dataset. We explore and compare the performance of various supervised learning models in predicting whether a patient has heart disease or not.
 
