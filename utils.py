@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sklearn.metrics import roc_curve, roc_auc_score, confusion_matrix, classification_report
+from sklearn.metrics import roc_curve, roc_auc_score, confusion_matrix, classification_report, accuracy_score
 import tensorflow.keras as keras
 
 def print_classification_report_from_model(model, X, y):
@@ -56,16 +56,6 @@ def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):
     plt.tight_layout()
     plt.show()
     
-    # cm = confusion_matrix(y, pred)
-
-    # plt.figure(figsize=(6, 5))
-    # sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
-    # plt.xlabel('Predicted Label')
-    # plt.ylabel('True Label')
-    # plt.title('Confusion Matrix')
-    # plt.tight_layout()
-    # plt.show()
-    
     
 def print_roc_curve(y, probs):
     fpr, tpr, thresholds = roc_curve(y, probs)
@@ -92,7 +82,7 @@ def print_metrics(model, X, y):
     else:
         pred = model.predict(X)
         probs = model.predict_proba(X)[:, 1]
-    
+    print(f'Accuracy: {accuracy_score(y, pred)}')
     print_classification_report(y, pred)
     print()
     print_confusion_matrix(y, pred)
