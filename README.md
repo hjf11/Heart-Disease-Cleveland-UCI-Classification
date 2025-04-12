@@ -8,7 +8,7 @@ This project focuses on binary classification of heart disease presence using th
 
 ## Dataset
 
-We use the Cleveland UCI Heart Disease dataset, which can be found on [Kaggle](https://www.kaggle.com/datasets/cherngs/heart-disease-cleveland-uci?fbclid=IwAR1Zs9rCsFKeC8-kOWTJF9sP5vB5ThC3pgcBjArKtHnt_uhLcXcv2petlS8).
+We use the Cleveland UCI Heart Disease dataset, which can be found on [Kaggle](https://www.kaggle.com/datasets/ritwikb3/heart-disease-cleveland).
 
 The target variable is binary:
 - **1**: Presence of heart disease
