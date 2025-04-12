@@ -47,7 +47,7 @@ def print_classification_report(y, pred):
     print(classification_report(y, pred))
     
     
-def print_confusion_matrix(y, pred, filename, folder='images', labels=['No Disease', 'Disease']):    
+def print_confusion_matrix(y, pred, title, filename, folder='images', labels=['No Disease', 'Disease']):    
     cm = confusion_matrix(y, pred)
     
     plt.figure(figsize=(6, 5))
@@ -78,7 +78,7 @@ def print_confusion_matrix(y, pred, filename, folder='images', labels=['No Disea
     
     plt.xlabel('Predicted Label')
     plt.ylabel('True Label')
-    plt.title('Confusion Matrix')
+    plt.title('Confusion Matrix for ' + title)
     
     plt.tight_layout()
     
@@ -104,7 +104,7 @@ def print_roc_curve(y, probs):
     plt.show()
     
     
-def print_metrics(model, X, y, filename): 
+def print_metrics(model, X, y, title, filename): 
     # check if it is keras model
     if isinstance(model, keras.Model):
         probs = model.predict(X, verbose=0)
@@ -115,7 +115,7 @@ def print_metrics(model, X, y, filename):
     print(f'Accuracy: {accuracy_score(y, pred)}')
     print_classification_report(y, pred)
     print()
-    print_confusion_matrix(y, pred, filename)
+    print_confusion_matrix(y, pred, title, filename)
     print_roc_curve(y, probs)
     
     
