@@ -1,8 +1,35 @@
+import os
 import numpy as np
+import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import xgboost as xgb
+
+from itertools import product
+from random import sample
+
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.metrics import roc_curve, roc_auc_score, confusion_matrix, classification_report, accuracy_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.utils import shuffle
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
+
+
+import tensorflow as tf
 import tensorflow.keras as keras
+from tensorflow.keras import Input
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.regularizers import l2
+from tensorflow.keras.callbacks import EarlyStopping
+from tensorflow.keras.layers import Dense, Dropout
+from tensorflow.keras.optimizers import Adam
+from sklearn.model_selection import StratifiedKFold
+
+from tqdm import tqdm
 
 def print_classification_report_from_model(model, X, y):
     if isinstance(model, keras.Model):
@@ -20,7 +47,7 @@ def print_classification_report(y, pred):
     print(classification_report(y, pred))
     
     
-def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):    
+def print_confusion_matrix(y, pred, filename, folder='images', labels=['No Disease', 'Disease']):    
     cm = confusion_matrix(y, pred)
     
     plt.figure(figsize=(6, 5))
@@ -54,6 +81,9 @@ def print_confusion_matrix(y, pred, labels=['No Disease', 'Disease']):
     plt.title('Confusion Matrix')
     
     plt.tight_layout()
+    
+    full_path = os.path.join(folder, filename)
+    plt.savefig(full_path, dpi=300)
     plt.show()
     
     
@@ -74,7 +104,7 @@ def print_roc_curve(y, probs):
     plt.show()
     
     
-def print_metrics(model, X, y): 
+def print_metrics(model, X, y, filename): 
     # check if it is keras model
     if isinstance(model, keras.Model):
         probs = model.predict(X, verbose=0)
@@ -85,11 +115,11 @@ def print_metrics(model, X, y):
     print(f'Accuracy: {accuracy_score(y, pred)}')
     print_classification_report(y, pred)
     print()
-    print_confusion_matrix(y, pred)
+    print_confusion_matrix(y, pred, filename)
     print_roc_curve(y, probs)
     
     
-def plot_roc_curves(models, model_names, X, y):
+def plot_roc_curves(models, model_names, X, y, filename='roc_curves.png', folder='images'):
     """
     Plots ROC curves for multiple models.
     
@@ -119,4 +149,7 @@ def plot_roc_curves(models, model_names, X, y):
     plt.title("ROC Curve Comparison")
     plt.legend(loc="lower right")
     plt.tight_layout()
+    
+    full_path = os.path.join(folder, filename)
+    plt.savefig(full_path, dpi=300)
     plt.show()
